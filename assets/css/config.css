@@ -1,0 +1,32 @@
+/*transition of pages*/
+.my-page-enter-active,
+.my-page-leave-active {
+  transition: all 0.7s;
+
+}
+.my-page-enter,
+.my-page-leave-to {
+  opacity: 0;
+  transform: scale(0);
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+}
+
+/* font */
+@font-face {
+  font-family: yekan;
+  src: url('../font/yekan-font/Yekan.eot');
+  src: url('../font/yekan-font/Yekan.eot?#iefix') format('FontName-opentype'),
+  url('../font/yekan-font/Yekan.woff') format('woff'),
+  url('../font/yekan-font/Yekan.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  background-color: white;
+}
