@@ -1,12 +1,13 @@
 <template>
   <header id="header" :style="heightOfHeader">
-    <div style="min-height: 80px"></div>
+    <div class="temp" style="min-height: 80px"></div>
     <div :style="headerContainer" class="container">
       <div :style="headerContainer" class="empty"></div>
       <div :style="headerContainer" class="description">
         <h1 :class="{'animation':animation}">.js community</h1>
         <h2 :class="{'animation':animation}">انجمن توسعه دهندگان جاواسکریپت</h2>
       </div>
+
     </div>
   </header>
 </template>
@@ -19,7 +20,7 @@
         heightOfHeader: 0,
         backgroundImage: '',
         headerContainer: 0,
-        animation:false
+        animation: false
       }
     },
     methods: {
@@ -47,14 +48,29 @@
 
     mounted() {
 
+      // if (window.innerWidth > 650) {
+      //
+      //   this.headerContainer = `min-height:${this.getHeaderHeight() - 80}px`;
+      // } else {
+      //   this.headerContainer = `min-height:${this.getHeaderHeight()}px+`;
+      // }
+
       window.addEventListener('resize', async () => {
         this.heightOfHeader = `min-height:${this.getHeaderHeight()}px`;
-        this.headerContainer = `min-height:${this.getHeaderHeight() - 80}px`;
+        if (window.innerWidth > 650) {
+          this.headerContainer = `min-height:${this.getHeaderHeight() - 80}px`;
+        } else {
+          this.headerContainer = `min-height:${this.getHeaderHeight()}px`;
+        }
+
       });
 
 
+      this.headerContainer = `min-height:${this.getHeaderHeight()}px`;
+      if (window.innerWidth > 650){
+        this.headerContainer = `min-height:${this.getHeaderHeight() - 80}px`;
 
-      this.headerContainer = `min-height:${this.getHeaderHeight() - 80}px`;
+      }
       const img = new Image();
       img.onload = async () => {
         await this.setHeader(img);
@@ -69,6 +85,8 @@
 
 <style scoped>
   header {
+    z-index: 9;
+    max-width: 100%;
     min-width: 100%;
     background-image: url("static/picture/header.jpg");
     background-size: 100% auto;
@@ -77,13 +95,15 @@
 
   header .container {
     min-width: 100%;
-    padding:0;
+    padding: 0;
     display: flex;
   }
-  .empty{
+
+  .empty {
     width: 60%;
   }
-  .description{
+
+  .description {
     width: 40%;
     display: flex;
     justify-content: center;
@@ -91,16 +111,24 @@
     flex-wrap: wrap;
 
   }
-  @keyframes x{
-    0%   {opacity: 0;}
-    25%  {opacity: 0.25;}
-    50%  {opacity: 0.5;}
-    100% {opacity: 1;}
+
+  @keyframes x {
+    0% {
+      opacity: 0;
+    }
+    25% {
+      opacity: 0.25;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
 
-
-  h1{
+  h1 {
     margin-bottom: 50px;
     text-align: center;
     width: 100%;
@@ -112,7 +140,8 @@
     transition: all 2s;
 
   }
-  .animation{
+
+  .animation {
     opacity: 1;
     transform: translateX(0);
 
@@ -120,7 +149,8 @@
     /*animation-delay: 0.5s;*/
     /*animation-duration: 1s;*/
   }
-  h2{
+
+  h2 {
     text-align: center;
     width: 100%;
     font-size: 25pt;
@@ -132,9 +162,26 @@
   }
 
 
-  @media only screen and (max-width: 600px) {
-    header {
-     display: none;
+  @media only screen and (max-width: 815px) {
+    h1 {
+      font-size: 20pt;
+    }
+
+    h2 {
+      font-size: 16pt;
+    }
+  }
+
+  @media only screen and (max-width: 650px) {
+    .temp, .empty {
+      display: none;
+    }
+
+    .description {
+      display: flex;
+      width: 100%;
+      height: fit-content;
+      background-color: rgba(0, 0, 0, 0.3);
     }
   }
 
