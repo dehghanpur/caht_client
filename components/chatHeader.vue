@@ -9,37 +9,41 @@
 </template>
 
 <script>
-    export default {
-        name: "chatHeader",
-      data() {
-        return {
-          image_src: '',
-          id: '',
-          border: '',
-          color: ''
-        }
-
-      },
-      mounted() {
-        this.$store.dispatch('loading/loading', {condition: false});
-        this.id = this.$store.state.community.community;
-        this.image_src = '/picture/' + this.$store.state.community.community + '.png';
-        this.color = this.$store.state.data.items[this.id].buttonColor;
-        this.border = `1px solid ${this.color}`;
-
+  export default {
+    name: "chatHeader",
+    data() {
+      return {
+        image_src: '',
+        id: '',
+        border: '',
+        color: ''
       }
+
+    },
+    mounted() {
+      this.$store.dispatch('loading/loading', {condition: false});
+      this.id = this.$store.state.community.community;
+      this.image_src = '/picture/' + this.$store.state.community.community + '.png';
+      this.color = this.$store.state.data.items[this.id].buttonColor;
+      this.border = `1px solid ${this.color}`;
+
     }
+  }
 </script>
 
 <style scoped>
   .wrapper {
+    z-index: 100;
     padding: 0;
     width: 100%;
     height: 80px;
     display: flex;
     justify-content: center;
     align-content: flex-start;
+    position: fixed;
+    top: 0;
   }
+
 
   .header {
     width: 75%;
@@ -57,6 +61,12 @@
     width: 75px;
     height: 75px;
     margin: 0 20px;
+  }
+
+  @media only screen and (max-width: 900px) {
+    .header {
+      width: 100%;
+    }
   }
 
 </style>

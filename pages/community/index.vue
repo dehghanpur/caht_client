@@ -2,6 +2,7 @@
 <div class="wrapper">
   <chat-header></chat-header>
   <chat></chat>
+  <input-box></input-box>
 </div>
 </template>
 
