@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
-    <div class="header" :style="{'border':border,'box-shadow':`0 0 5px ${color}`}">
-      <img :src="image_src" alt="logo" class="logo">
-      <h1 :style="{'color':color}">{{id}} community</h1>
+    <div class="header" :style="{'border':info.border,'box-shadow':`0 0 5px ${info.color}`}">
+      <img :src="info.image_src" alt="logo" class="logo">
+      <h1 :style="{'color':info.color}">{{info.id}} community</h1>
     </div>
 
   </div>
@@ -11,29 +11,16 @@
 <script>
   export default {
     name: "chatHeader",
-    data() {
-      return {
-        image_src: '',
-        id: '',
-        border: '',
-        color: ''
-      }
-
+    props:{
+      info:Object
     },
-    mounted() {
-      this.$store.dispatch('loading/loading', {condition: false});
-      this.id = this.$store.state.community.community;
-      this.image_src = '/picture/' + this.$store.state.community.community + '.png';
-      this.color = this.$store.state.data.items[this.id].buttonColor;
-      this.border = `1px solid ${this.color}`;
 
-    }
   }
 </script>
 
 <style scoped>
   .wrapper {
-    z-index: 100;
+    z-index: 5;
     padding: 0;
     width: 100%;
     height: 80px;

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="main" :style="{'border':border,'box-shadow':`0 0 2px ${color}`}">
+    <div class="main" :style="{'border':info.border,'box-shadow':`0 0 2px ${info.color}`}">
       <div class="input">
           <textarea dir="auto"></textarea>
       </div>
@@ -15,19 +15,13 @@
 <script>
   export default {
     name: "inputBox",
+    props:{
+      info:Object
+    },
     data() {
       return {
         image_src: '',
-        id: '',
-        border: '',
-        color: ''
       }
-
-    },
-    mounted() {
-      this.id = this.$store.state.community.community;
-      this.color = this.$store.state.data.items[this.id].buttonColor;
-      this.border = `1px solid ${this.color}`;
 
     }
 
@@ -42,7 +36,7 @@
     justify-content: center;
     align-content: flex-start;
     position: fixed;
-    z-index: 100;
+    z-index: 1;
     padding: 10px 0;
     bottom: 0;
     left: 0;
@@ -58,11 +52,14 @@
     justify-content: center;
     align-items: center;
     padding: 5px;
+    z-index: 1;
+
 
   }
   .input{
     width: 95%;
     height: 100%;
+    z-index: 100;
   }
   .send{
     width: 5%;
@@ -80,6 +77,7 @@
     resize: none;
     border: 1px solid black;
     border-radius: 8px;
+    z-index: 100;
   }
   .input textarea:focus{
     border-radius: 10px;
@@ -98,6 +96,15 @@
   @media only screen and (max-width: 900px) {
     .main {
       width: 100%;
+    }
+
+  }
+  @media only screen and (max-width: 700px) {
+    .send{
+      width: 13%;
+    }
+    .input{
+      width: 87%;
     }
   }
 
