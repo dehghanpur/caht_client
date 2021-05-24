@@ -23,6 +23,7 @@
   }
 
   .loading {
+    z-index: 100;
     position: fixed;
     width: 100%;
     height: 100%;

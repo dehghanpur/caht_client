@@ -6,7 +6,10 @@
     <div class="title">
       <h1 :class="{'title_appear':appear}">{{data.title}}</h1>
       <h2 :class="{'title_appear':appear}">{{data.description}}</h2>
-      <button :class="{'title_appear':appear}" :style="`background-color:${data.buttonColor}`">ورود به صفحه</button>
+      <button @click="enter()"
+              :class="{'title_appear':appear}"
+              :style="`background-color:${data.buttonColor}`">ورود به صفحه
+      </button>
     </div>
   </div>
 </template>
@@ -18,12 +21,24 @@
       data: Object,
       revers: Boolean
     },
+    methods: {
+      enter() {
+        this.$store.dispatch('community/communityAction', {community: this.data.id});
+        this.$store.dispatch('community/toggleAction');
+      }
+    },
     data() {
       return {
         appear: false
       }
     },
     mounted() {
+      const topHeight = document.getElementById(this.data.id).offsetTop;
+      const heightDiv = document.getElementById(this.data.id).offsetHeight;
+      const windowHeight = window.innerHeight;
+      if (window.scrollY > topHeight - 100 || window.scrollY + windowHeight > topHeight + heightDiv) {
+        this.appear = true;
+      }
 
 
       const scrollFunction = () => {
@@ -35,7 +50,7 @@
           window.removeEventListener("scroll", scrollFunction);
         }
       };
-      window.addEventListener('scroll',scrollFunction )
+      window.addEventListener('scroll', scrollFunction)
     }
   }
 </script>
@@ -101,10 +116,12 @@
     opacity: 0;
 
   }
-  h1{
+
+  h1 {
     transform: translateX(-100px);
   }
-  h2{
+
+  h2 {
     transform: translateX(+100px);
   }
 
@@ -122,7 +139,8 @@
 
 
   }
-  .title_appear{
+
+  .title_appear {
     transform: translate(0);
 
 
@@ -133,6 +151,7 @@
     box-shadow: 0 0 8px gray;
 
   }
+
   @media only screen and (max-width: 1100px) {
     .icon {
       width: 20%;
@@ -148,34 +167,35 @@
     }
   }
 
-    @media only screen and (max-width: 800px) {
-      .icon {
-        width: 20%;
-      }
-
-      .title {
-        width: 75%;
-      }
-
-      img {
-        width: 200px;
-        height: 200px;
-      }
-
+  @media only screen and (max-width: 800px) {
+    .icon {
+      width: 20%;
     }
-      @media only screen and (max-width: 750px) {
-        .icon {
-          width: 20%;
-        }
 
-        .title {
-          width: 100%;
-        }
+    .title {
+      width: 75%;
+    }
 
-        img {
-          width: 200px;
-          height: 200px;
-        }
+    img {
+      width: 200px;
+      height: 200px;
+    }
 
-      }
+  }
+
+  @media only screen and (max-width: 750px) {
+    .icon {
+      width: 20%;
+    }
+
+    .title {
+      width: 100%;
+    }
+
+    img {
+      width: 200px;
+      height: 200px;
+    }
+
+  }
 </style>
