@@ -73,7 +73,9 @@ export default {
       }
     }
   },
-
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:8080/api'
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

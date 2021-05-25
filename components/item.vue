@@ -24,7 +24,12 @@
     methods: {
       enter() {
         this.$store.dispatch('community/communityAction', {community: this.data.id});
-        this.$store.dispatch('community/toggleAction');
+        if (this.$store.state.auth.isAuth) {
+          this.$store.dispatch('community/nameAction', {name: this.$store.state.auth.name});
+          this.$router.push('/community')
+        } else {
+          this.$store.dispatch('community/toggleAction');
+        }
       }
     },
     data() {

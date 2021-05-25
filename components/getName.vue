@@ -27,6 +27,7 @@
       }
     },
     methods: {
+
       close() {
         this.$store.dispatch('community/toggleAction')
         this.$store.dispatch('community/communityAction', {community: ''})
@@ -34,15 +35,30 @@
 
 
       },
-      enterCommunity() {
-        if (this.name !== ''){
-          this.$store.dispatch('community/nameAction', {name: this.name});
-          this.$router.push('/community')
+      async enterCommunity() {
+        if (this.name !== '') {
+          try {
+            const response = await this.$axios.$post(`${process.env.baseUrl}/setUser`, {
+              name: this.name
+            });
+            const user = response.user;
+            console.log(user._id)
+            this.$store.dispatch('auth/authenticateUser', {id: user._id, name: user.name});
+            this.$store.dispatch('community/nameAction', {name: this.name});
+            this.$store.dispatch('community/toggleAction')
+            this.$router.push('/community')
 
-        }
-        else
+          } catch (e) {
+            console.log(e)
+          }
+
+
+        } else
           this.show = true
       },
+
+    },
+    mounted() {
 
     }
   }
