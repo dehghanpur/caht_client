@@ -10,6 +10,7 @@
 <script>
   export default {
     name: "index",
+    middleware:'check',
     data(){
       return{
         info:{
