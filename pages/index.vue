@@ -29,6 +29,7 @@
     name: "index",
     scrollToTop: true,
     components: {GetName, MainHeader, MainNav},
+    middleware:['initAuth']
 
 
   }
