@@ -97,6 +97,12 @@
     .main {
       width: 100%;
     }
+    .send{
+      width: 8%;
+    }
+    .input{
+      width: 92%;
+    }
 
   }
   @media only screen and (max-width: 700px) {

@@ -21,13 +21,20 @@
         }
       }
     },
+    methods:{
+      init(){
+        this.info.id = this.$store.state.community.community;
+        this.info.image_src = '/picture/' + this.$store.state.community.community + '.png';
+        this.info.color = this.$store.state.data.items[this.info.id].buttonColor;
+        this.info.border = `1px solid ${this.color}`;
+      }
+    },
     mounted() {
-      this.info.id = this.$store.state.community.community;
-      this.info.image_src = '/picture/' + this.$store.state.community.community + '.png';
-      this.info.color = this.$store.state.data.items[this.info.id].buttonColor;
-      this.info.border = `1px solid ${this.color}`;
+      this.init();
 
-    }
+
+    },
+
 
 
   }

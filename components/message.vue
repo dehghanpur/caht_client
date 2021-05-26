@@ -1,7 +1,7 @@
 <template>
-  <div class="message_wrapper">
+  <div :class="{'message_wrapper':true,'self_message':$store.state.auth.id === message.user._id}">
     <div class="author">
-      <h6 dir="auto">{{message.author}}</h6>
+      <h6 dir="auto">{{message.user.name}}</h6>
     </div>
     <div class="content">
       <pre dir="auto">
@@ -35,9 +35,13 @@
     box-shadow: 0 0 5px gray;
 
   }
+  .self_message{
+    background-color: #ceffca;
+
+  }
 
   .author{
-    background-color: white;
+
 
     width: 100%;
 
