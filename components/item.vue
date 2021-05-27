@@ -34,7 +34,8 @@
     },
     data() {
       return {
-        appear: false
+        appear: false,
+        scrollFunction:null
       }
     },
     mounted() {
@@ -46,16 +47,20 @@
       }
 
 
-      const scrollFunction = () => {
+      this.scrollFunction = () => {
         const topHeight = document.getElementById(this.data.id).offsetTop;
         const heightDiv = document.getElementById(this.data.id).offsetHeight;
         const windowHeight = window.innerHeight;
         if (window.scrollY > topHeight - 100 || window.scrollY + windowHeight > topHeight + heightDiv) {
           this.appear = true;
-          window.removeEventListener("scroll", scrollFunction);
+          window.removeEventListener("scroll", this.scrollFunction);
         }
       };
-      window.addEventListener('scroll', scrollFunction)
+      window.addEventListener('scroll', this.scrollFunction)
+    },
+    destroyed() {
+      window.removeEventListener("scroll", this.scrollFunction);
+
     }
   }
 </script>

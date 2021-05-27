@@ -36,7 +36,6 @@
     width: 75%;
     height: 80px;
     margin: 10px;
-    border: 1px solid red;
     border-radius: 7px;
     display: flex;
     justify-content: center;

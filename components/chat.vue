@@ -26,7 +26,11 @@
     name: "chat",
     components: {OnlineList},
     props: {
-      info: Object
+      info: Object,
+      socket:{
+        default:{},
+        type:Object
+      }
     },
     methods: {
       async fetchMessages() {
@@ -55,8 +59,9 @@
     updated() {
       //for scrool to last of message thst seen
       const objDiv = document.getElementById("chat");
-      if (this.page === 1) {
+      if (this.page === 1 || this.newmsg) {
         //scroll to bottom of div
+        this.newmsg = false;
         objDiv.scrollTop = objDiv.scrollHeight;
       } else if (this.page > 1) {
         //scroll to last of message that seen
@@ -66,6 +71,13 @@
 
     },
     async mounted() {
+
+
+      this.socket.on('getMessage',(msg)=>{
+          this.newmsg = true;
+          this.messages.push(msg)
+      });
+
 
       const e = document.getElementById('chat');
       e.onscroll = () => {
@@ -79,6 +91,8 @@
     },
     data() {
       return {
+        newMsg:false,
+        socket:null,
         page: 0, //save page number of message
         list: [{name: 'mohammad', _id: 'fdfdfssd'}],
         showOnlineList: false, // flag for show online list or not

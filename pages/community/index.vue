@@ -1,18 +1,22 @@
 <template>
 <div class="wrapper">
   <chat-header :info="info"></chat-header>
-  <chat :info="info"></chat>
+  <chat v-if="showChat" :info="info" :socket="socket"></chat>
 
-  <input-box :info="info"></input-box>
+  <input-box v-if="showChat" :info="info" :socket="socket"></input-box>
 </div>
 </template>
 
 <script>
+  import {io} from "socket.io-client";
+
   export default {
     name: "index",
     middleware:'check',
     data(){
       return{
+        socket:{},
+        showChat:false,
         info:{
           id:'',
           color:'',
@@ -29,12 +33,28 @@
         this.info.border = `1px solid ${this.color}`;
       }
     },
-    mounted() {
+    async mounted() {
+      this.socket = await io('http://localhost:8080'); //conncet the socke server
+      this.showChat = true; //show chat div
+
+      this.socket.on('connect',()=>{
+        this.socket.emit('setRoom',{ //set room of chat
+          room:this.$store.state.community.community,
+          userId:this.$store.state.auth.id
+        });
+        this.socket.emit('sendMessage','joined in community !!') //send join message
+      });
+      this.socket.on('disconnect',()=>{
+        this.socket.emit('sendMessage','left the community !!') //send left message
+      });
       this.init();
 
 
     },
-
+    destroyed() {
+      this.socket.disconnect();
+      this.showChat = false;
+    }
 
 
   }
