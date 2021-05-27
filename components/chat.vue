@@ -38,7 +38,7 @@
           if (this.page !== 0)
             this.firstMessageId = this.messages[0]._id; // for scroll to last message that seen
 
-          const url = `${process.env.baseUrl}/getMessage?page=${this.page}&community=${this.$store.state.community.community}`;
+          const url = `${process.env.baseUrl}/getMessage?page=${parseInt(`${this.messages.length / 10}`)}&community=${this.$store.state.community.community}`;
           const response = await this.$axios.$get(url);
           response.message.forEach(m => {
             this.messages.unshift(m);
@@ -65,7 +65,7 @@
     updated() {
       //for scrool to last of message thst seen
       const objDiv = document.getElementById("chat");
-      if (this.page === 1  || this.newmsg) {
+      if (this.page === 1 || this.newmsg) {
         //scroll to bottom of div
         this.newmsg = false;
         objDiv.scrollTop = objDiv.scrollHeight;
@@ -83,7 +83,7 @@
         this.newmsg = true;
         this.messages.push(msg)
       });
-      this.socket.on('online',(list)=>{
+      this.socket.on('online', (list) => {
         this.list = list;
       });
 
@@ -165,7 +165,6 @@
     border: 2px solid black;
     cursor: pointer;
   }
-
 
 
   @media only screen and (max-width: 900px) {
