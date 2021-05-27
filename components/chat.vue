@@ -1,15 +1,15 @@
 <template>
   <div class="wrapper">
-<!--    list of online person -->
+    <!--    list of online person -->
     <online-list @closeList="showOnlineList = false" :list="list" v-if="showOnlineList"></online-list>
     <div class="chat_wrapper">
       <div class="chat" id="chat">
-<!--        show number of person that is online now-->
+        <!--        show number of person that is online now-->
         <div class="online">
           <h1 @click="showOnlineList  = true" :style="{'text-shadow':`0 0 2px ${info.color}`}">online person
             ({{list.length}})</h1>
         </div>
-<!--        messages-->
+        <!--        messages-->
         <message v-for="i in messages" :key="i._id" :message="i" :id="i._id"></message>
       </div>
 
@@ -27,9 +27,9 @@
     components: {OnlineList},
     props: {
       info: Object,
-      socket:{
-        default:{},
-        type:Object
+      socket: {
+        default: {},
+        type: Object
       }
     },
     methods: {
@@ -51,7 +51,13 @@
         } catch (e) {
           console.log(e)
         }
+      },
+      scrollToBottom() {
+        const objDiv = document.getElementById("chat");
+
+        objDiv.scrollTop = objDiv.scrollHeight;
       }
+
     },
     fetch() {
       this.fetchMessages();
@@ -59,7 +65,7 @@
     updated() {
       //for scrool to last of message thst seen
       const objDiv = document.getElementById("chat");
-      if (this.page === 1 || this.newmsg) {
+      if (this.page === 1  || this.newmsg) {
         //scroll to bottom of div
         this.newmsg = false;
         objDiv.scrollTop = objDiv.scrollHeight;
@@ -73,9 +79,12 @@
     async mounted() {
 
 
-      this.socket.on('getMessage',(msg)=>{
-          this.newmsg = true;
-          this.messages.push(msg)
+      this.socket.on('getMessage', (msg) => {
+        this.newmsg = true;
+        this.messages.push(msg)
+      });
+      this.socket.on('online',(list)=>{
+        this.list = list;
       });
 
 
@@ -88,11 +97,13 @@
 
       }
 
-    },
+    }
+    ,
     data() {
       return {
-        newMsg:false,
-        socket:null,
+        bottomCondition: false,
+        newMsg: false,
+        socket: null,
         page: 0, //save page number of message
         list: [{name: 'mohammad', _id: 'fdfdfssd'}],
         showOnlineList: false, // flag for show online list or not
@@ -154,6 +165,8 @@
     border: 2px solid black;
     cursor: pointer;
   }
+
+
 
   @media only screen and (max-width: 900px) {
     .wrapper {

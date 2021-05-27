@@ -1,35 +1,36 @@
 <template>
-    <div class="list_wrapper">
-      <div class="list">
-        <h1  @click="$emit('closeList')" style="position: sticky;top: 0;left: 150px">بستن</h1>
-        <h3 v-for="i in list" :key="i._id">{{i.name}}</h3>
-      </div>
+  <div class="list_wrapper">
+    <div class="list">
+      <h1 @click="$emit('closeList')" style="position: sticky;top: 0;left: 150px">بستن</h1>
+      <h3 v-for="i in list" :key="i._id" :class="{'self':$store.state.auth.id ===i._id}">{{i.name}}</h3>
     </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "onlineList",
-        props:{
-          list:Array
-        }
+  export default {
+    name: "onlineList",
+    props: {
+      list: Array
     }
+  }
 </script>
 
 <style scoped>
-  .list_wrapper{
+  .list_wrapper {
     width: 100%;
     height: 100%;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 10;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .list{
+
+  .list {
     width: 350px;
     height: 70%;
     background-color: white;
@@ -39,15 +40,16 @@
     position: relative;
     z-index: 10;
   }
-  .list h3{
-    text-align: center;
-    padding: 6px;
-    margin: 3px;
-    border-bottom: 2px solid black;
 
+  .list h3 {
+    text-align: center;
+
+    border-bottom: 2px solid black;
+    font-family: yekan;
 
   }
-  h1{
+
+  h1 {
     font-size: 15pt;
     background-color: #ff6a3f;
     position: absolute;
@@ -57,4 +59,7 @@
     z-index: 100;
   }
 
+  .self {
+    background-color: #8bffcd;
+  }
 </style>

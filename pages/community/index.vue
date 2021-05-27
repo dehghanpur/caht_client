@@ -40,13 +40,11 @@
       this.socket.on('connect',()=>{
         this.socket.emit('setRoom',{ //set room of chat
           room:this.$store.state.community.community,
-          userId:this.$store.state.auth.id
+          userId:this.$store.state.auth.id,
+          name:this.$store.state.auth.name
         });
-        this.socket.emit('sendMessage','joined in community !!') //send join message
       });
-      this.socket.on('disconnect',()=>{
-        this.socket.emit('sendMessage','left the community !!') //send left message
-      });
+
       this.init();
 
 
