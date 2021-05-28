@@ -13,6 +13,7 @@
 <style scoped>
   footer{
     width:100%
+
   }
   p{
     width: 100%;

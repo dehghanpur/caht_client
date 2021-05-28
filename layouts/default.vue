@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <div v-if="loading" class="loading">
-      <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-    </div>
+  <div class="w">
+<!--    <div v-if="loading" class="loading">-->
+<!--      <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>-->
+<!--    </div>-->
     <nuxt/>
   </div>
 </template>
@@ -18,13 +18,19 @@
   }
 </script>
 <style>
+  .w{
+    width: 100%;
+    height: 100%;
+
+  }
   html {
+    overflow-x: hidden;
     scroll-behavior: smooth;
   }
 
   .loading {
     z-index: 100;
-    position: fixed;
+    /*position: fixed;*/
     width: 100%;
     height: 100%;
     display: flex;

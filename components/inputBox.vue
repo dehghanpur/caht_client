@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="main" :style="{'border':info.border,'box-shadow':`0 0 2px ${info.color}`}">
       <div class="input">
-        <textarea dir="auto" v-model="msg"></textarea>
+        <textarea @keypress.enter="sendMessage()" dir="auto" v-model="msg"></textarea>
       </div>
       <div class="send">
         <img @click="sendMessage()" src="/picture/send.png">

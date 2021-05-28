@@ -1,11 +1,14 @@
 <template>
-  <div class="main">
+  <div class="a">
 
 
     <get-name></get-name>
 
     <main-nav></main-nav>
-    <main-header></main-header>
+    <div style="max-width: 100%; overflow-x: hidden" >
+      <main-header></main-header>
+
+
     <div class="item_wrapper">
       <item :data="$store.state.data.items.vue" :revers="true"></item>
       <item :data="$store.state.data.items.react" :revers="false"></item>
@@ -16,7 +19,7 @@
     </div>
     <main-footer></main-footer>
 
-
+    </div>
   </div>
 </template>
 
@@ -27,7 +30,6 @@
 
   export default {
     name: "index",
-    scrollToTop: true,
     components: {GetName, MainHeader, MainNav},
     middleware:['initAuth']
 
@@ -38,15 +40,15 @@
 </script>
 
 <style scoped>
-  .main {
-    max-width: 100%;
-    min-width: 100%;
+  .a {
+    width: 100%;
+    height: 100vh;
   }
 
   .item_wrapper {
+    width: 100%;
     padding-top: 20px;
     padding-bottom: 10px;
-    max-width: 100%;
     background-image: url("/picture/hero-bg.jpg");
     background-size: 100% 100%;
     background-attachment: fixed;

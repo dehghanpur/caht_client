@@ -33,6 +33,7 @@
 
 
   .header {
+    z-index: 5;
     width: 75%;
     height: 80px;
     margin: 10px;
@@ -52,6 +53,7 @@
   @media only screen and (max-width: 900px) {
     .header {
       width: 100%;
+      z-index: 5;
     }
   }
 

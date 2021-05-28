@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'message_wrapper':true,'self_message':$store.state.auth.id === message.user._id}">
+  <div :class="{'message_wrapper':true,'self_message':$store.state.auth.id === message.user._id,'show':show}">
     <div class="author">
       <h6 dir="auto">{{message.user.name}}</h6>
     </div>
@@ -21,6 +21,16 @@
         name: "message",
         props:{
           message:Object,
+        },
+        data(){
+          return{
+            show:false
+          }
+        },
+        mounted() {
+          setTimeout(()=>{
+            this.show=true;
+          },20)
         }
     }
 </script>
@@ -33,7 +43,15 @@
     padding: 7px;
     margin: 8px;
     box-shadow: 0 0 5px gray;
+    opacity: 0;
+    transform: translateX(5px);
+    transition: all 0.5s;
 
+  }
+  .show{
+    z-index: 0;
+    opacity:1;
+    transform: translateX(0);
   }
   .self_message{
     background-color: #ceffca;
@@ -72,6 +90,7 @@
   @media only screen and (max-width: 700px) {
     .message_wrapper{
       width: 350px;
+      margin: 8px 2px;
     }
     pre{
       font-size: 10pt;

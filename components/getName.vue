@@ -10,7 +10,7 @@
           <h4>لطفا نام خود را وارد كنيد</h4>
 
         </div>
-        <input type="text" placeholder="لطفا نام خود را وارد کنید" v-model="name">
+        <input @keypress="enterCommunity()" type="text" placeholder="لطفا نام خود را وارد کنید" v-model="name">
         <button @click="enterCommunity()">ورود</button>
       </div>
     </div>
@@ -182,7 +182,9 @@
   }
 
   @media only screen and (max-width: 750px) {
-
+  .form{
+    width: 450px;
+  }
   }
 
 </style>

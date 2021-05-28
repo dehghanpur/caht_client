@@ -23,7 +23,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 200;
     background-color: rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: center;
