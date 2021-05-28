@@ -3,12 +3,11 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - chat_client',
-    title: 'chat_client',
+    title: 'انجمن توسعه دهنگان',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: 'انجمن توسعه دهندگان برتر ' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -17,7 +16,13 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '~/assets/css/config.css'
   ],
+  pageTransition: {
+    name: 'my-page',
+    mode: 'out-in'
+  },
+
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -54,7 +59,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+
       themes: {
         dark: {
           primary: colors.blue.darken2,
@@ -68,7 +73,9 @@ export default {
       }
     }
   },
-
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:8080/api'
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }
