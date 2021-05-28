@@ -10,7 +10,7 @@
           <h4>لطفا نام خود را وارد كنيد</h4>
 
         </div>
-        <input @keypress="enterCommunity()" type="text" placeholder="لطفا نام خود را وارد کنید" v-model="name">
+        <input @keypress.enter="enterCommunity()" type="text" placeholder="لطفا نام خود را وارد کنید" v-model="name">
         <button @click="enterCommunity()">ورود</button>
       </div>
     </div>
