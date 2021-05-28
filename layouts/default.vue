@@ -1,8 +1,8 @@
 <template>
   <div class="w">
-<!--    <div v-if="loading" class="loading">-->
-<!--      <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>-->
-<!--    </div>-->
+    <div v-if="loading" class="loading">
+         <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
     <nuxt/>
   </div>
 </template>
