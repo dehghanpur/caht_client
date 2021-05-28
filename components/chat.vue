@@ -35,17 +35,21 @@
     methods: {
       async fetchMessages() {
         try {
-          if (this.page !== 0)
-            this.firstMessageId = this.messages[0]._id; // for scroll to last message that seen
+          if (!this.finish) {
+            if (this.page !== 0)
+              this.firstMessageId = this.messages[0]._id; // for scroll to last message that seen
 
-          const url = `${process.env.baseUrl}/getMessage?page=${parseInt(`${this.messages.length / 10}`)}&community=${this.$store.state.community.community}`;
-          const response = await this.$axios.$get(url);
-          response.message.forEach(m => {
-            this.messages.unshift(m);
-          });
+            const url = `${process.env.baseUrl}/getMessage?page=${parseInt(`${this.messages.length / 10}`)}&community=${this.$store.state.community.community}`;
+            const response = await this.$axios.$get(url);
+            response.message.forEach(m => {
+              this.messages.unshift(m);
+            });
 
-          if (response.message.length !== 0)//if all message finished don't increase page number
-            this.page = this.page + 1;
+            if (response.message.length !== 0)//if all message finished don't increase page number
+              this.page = this.page + 1;
+            if (response.messages.length < 10)
+              this.finish = true
+          }
 
 
         } catch (e) {
@@ -58,10 +62,12 @@
         objDiv.scrollTop = objDiv.scrollHeight;
       }
 
-    },
+    }
+    ,
     fetch() {
       this.fetchMessages();
-    },
+    }
+    ,
     updated() {
       //for scrool to last of message thst seen
       const objDiv = document.getElementById("chat");
@@ -75,7 +81,8 @@
         objDiv.scrollTop = o.offsetTop - 50;
       }
 
-    },
+    }
+    ,
     async mounted() {
 
 
@@ -102,6 +109,7 @@
     data() {
       return {
         bottomCondition: false,
+        finish: false,
         newMsg: false,
         socket: null,
         page: 0, //save page number of message

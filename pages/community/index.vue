@@ -34,7 +34,7 @@
       }
     },
     async mounted() {
-      this.socket = await io('http://localhost:8080'); //conncet the socke server
+      this.socket = await io('https://dehghanpour10-chat-server.herokuapp.com/'); //conncet the socke server
       this.showChat = true; //show chat div
 
       this.socket.on('connect',()=>{
